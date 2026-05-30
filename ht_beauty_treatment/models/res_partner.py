@@ -5,7 +5,7 @@ from odoo import models, fields, api
 class ResPartnerTreatment(models.Model):
     _inherit = 'res.partner'
 
-    # --- Liên kết Phác đồ ---
+    # ---- Liên kết Phác đồ ----
     treatment_plan_ids = fields.One2many('beauty.treatment.plan', 'partner_id', string='Phác đồ điều trị')
     treatment_plan_count = fields.Integer(string='Số phác đồ', compute='_compute_treatment_plan_count')
 
