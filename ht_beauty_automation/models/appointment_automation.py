@@ -5,7 +5,7 @@ import pytz
 class BeautyAppointment(models.Model):
     _inherit = 'beauty.appointment'
 
-    # Các cờ kiểm soát Cron job không chạy lặp lại
+    # Các kiểm soát Cron job không chạy lặp lại
     reminder_sent = fields.Boolean(string='Đã gửi nhắc hẹn', default=False, tracking=True)
     late_alert_sent = fields.Boolean(string='Đã cảnh báo trễ', default=False, tracking=True)
 
