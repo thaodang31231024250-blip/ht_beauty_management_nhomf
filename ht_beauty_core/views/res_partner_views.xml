@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_beauty" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.beauty</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="gender"/>
+                <field name="birthday"/>
+                <field name="zalo_link" widget="url" placeholder="https://zalo.me/..."/>
+                <field name="customer_source"/>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                
+                <page string="Hồ sơ Thẩm mỹ" name="beauty_medical_record">
+                    <group>
+                        <group string="Đặc điểm Thẩm mỹ">
+                            <field name="skin_type"/>
+                            <field name="skin_condition"/>
+                            <field name="treatment_goal" placeholder="VD: Muốn trị nám mảng 2 bên má, cải thiện lỗ chân lông..."/>
+                        </group>
+
+                        <group string="Kết quả soi da" colspan="2">
+                            <group>
+                                <field name="skin_analysis_image" widget="image" options="{'size': [256, 256]}"/>
+                            </group>
+                            <group>
+                                <field name="skin_analysis_notes" placeholder="Ghi chú chi tiết về tình trạng mụn, nám, lỗ chân lông..."/>
+                            </group>
+                        </group>
+                        
+                        <group string="Tiền sử Y tế">
+                            <field name="chronic_disease"/>
+                            <field name="medical_history" placeholder="Nhập tiền sử bệnh lý (nếu có)..."/>
+                            <field name="allergy_note" placeholder="Nhập thông tin dị ứng thuốc, thức ăn, mỹ phẩm..."/>
+                            <field name="using_medicine"/>
+                            <field name="medicine_note" 
+                                   invisible="using_medicine == False" 
+                                   placeholder="Ghi rõ tên các loại thuốc đang sử dụng..."/>
+                        </group>
+                    </group>
+                </page>
+
+                <page string="Tiến độ Điều trị" name="beauty_treatment_progress">
+                    <group>
+                        <group>
+                            <field name="treatment_status" widget="badge" 
+                                   decoration-info="treatment_status == 'new'" 
+                                   decoration-warning="treatment_status == 'consulted'" 
+                                   decoration-success="treatment_status == 'in_progress'" 
+                                   decoration-primary="treatment_status == 'completed'"/>
+                            <field name="session_count"/>
+                        </group>
+                        <group>
+                            <field name="next_appointment"/>
+                            <field name="treatment_note" placeholder="Ghi chú tổng quan về toàn bộ quá trình điều trị..."/>
+                        </group>
+                    </group>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_beauty_leads" model="ir.actions.act_window">
+        <field name="name">Danh sách Leads</field>
+        <field name="res_model">crm.lead</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="domain">[('type', '=', 'lead')]</field>
+        <field name="context">{
+            'default_type': 'lead',
+            'search_default_type': 'lead',
+        }</field>
+        <field name="search_view_id" ref="crm.view_crm_case_leads_filter"/>
+    </record>
+
+    <record id="action_beauty_treatment_record" model="ir.actions.act_window">
+        <field name="name">Danh sách Hồ sơ điều trị</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('is_company', '=', False), ('employee', '=', False)]</field>
+        <field name="context">{'default_is_company': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo hồ sơ điều trị cho khách hàng mới
+            </p>
+            <p>
+                Quản lý thông tin cá nhân, tiền sử y tế, tình trạng da và tiến độ điều trị của khách.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_beauty_loyalty_program" model="ir.actions.act_window">
+        <field name="name">Chương trình khuyến mãi &amp; Voucher</field>
+        <field name="res_model">loyalty.program</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo chương trình Khuyến mãi đầu tiên!
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem id="menu_ht_beauty_root" 
+              name="HT BEAUTY" 
+              sequence="10"
+              web_icon="ht_beauty_core,static/description/icon.png"/>
+
+
+    <menuitem id="menu_beauty_leads" 
+              name="Quản lý Leads" 
+              parent="menu_ht_beauty_root" 
+              sequence="10"/>
+              
+    <menuitem id="menu_beauty_lead_list" 
+              name="Danh sách Leads" 
+              parent="menu_beauty_leads" 
+              action="action_beauty_leads" 
+              sequence="5"/>
+
+    <menuitem id="menu_beauty_opportunities" 
+              name="Cơ hội tư vấn" 
+              parent="menu_beauty_leads" 
+              action="crm.crm_lead_action_pipeline" 
+              sequence="10"/>
+              
+    <menuitem id="menu_beauty_care_activities" 
+              name="Hoạt động chăm sóc" 
+              parent="menu_beauty_leads" 
+              action="crm.crm_lead_action_my_activities" 
+              sequence="20"/>
+
+
+    <menuitem id="menu_beauty_appointments_main" 
+              name="Quản lý lịch hẹn" 
+              parent="menu_ht_beauty_root" 
+              sequence="20"/>
+
+
+    <menuitem id="menu_beauty_treatment" 
+              name="Hồ sơ điều trị" 
+              parent="menu_ht_beauty_root" 
+              sequence="30"/>
+              
+    <menuitem id="menu_beauty_treatment_list" 
+              name="Danh sách hồ sơ" 
+              parent="menu_beauty_treatment" 
+              action="action_beauty_treatment_record"
+              sequence="5"/>
+              
+    <menuitem id="menu_beauty_treatment_plan" 
+              name="Phác đồ điều trị" 
+              parent="menu_beauty_treatment" 
+              sequence="10"/>
+              
+    <menuitem id="menu_beauty_treatment_diary" 
+              name="Nhật ký điều trị" 
+              parent="menu_beauty_treatment" 
+              sequence="20"/>
+
+
+    <menuitem id="menu_beauty_reports" 
+              name="Báo cáo &amp; Thống kê" 
+              parent="menu_ht_beauty_root" 
+              sequence="40"/>
+              
+    <menuitem id="menu_beauty_report_pipeline" 
+              name="Báo cáo Pipeline CSKH" 
+              parent="menu_beauty_reports" 
+              action="crm.crm_opportunity_report_action"
+              sequence="10"/>
+              
+    <menuitem id="menu_beauty_report_appointment" 
+              name="Báo cáo lịch hẹn" 
+              parent="menu_beauty_reports" 
+              sequence="20"/>
+              
+    <menuitem id="menu_beauty_report_cancel" 
+              name="Báo cáo hủy lịch" 
+              parent="menu_beauty_reports" 
+              sequence="30"/>
+
+
+    <menuitem id="menu_beauty_configuration" 
+              name="Cấu hình hệ thống" 
+              parent="menu_ht_beauty_root" 
+              sequence="50"
+              groups="ht_beauty_core.beauty_group_manager,ht_beauty_core.beauty_group_admin"/>
+              
+    <menuitem id="menu_beauty_config_employee" 
+              name="Nhân viên" 
+              parent="menu_beauty_configuration" 
+              action="hr.open_view_employee_list_my" 
+              sequence="10"/>
+              
+    <menuitem id="menu_beauty_config_room" 
+              name="Phòng điều trị" 
+              parent="menu_beauty_configuration" 
+              action="action_beauty_room"
+              sequence="20"/>
+              
+    <menuitem id="menu_beauty_config_service" 
+              name="Dịch vụ" 
+              parent="menu_beauty_configuration" 
+              action="sale.product_template_action" 
+              sequence="30"/>
+              
+    <menuitem id="menu_beauty_config_promo" 
+              name="Chương trình khuyến mãi" 
+              parent="menu_beauty_configuration" 
+              action="action_beauty_loyalty_program"
+              sequence="40"/>
+              
+    <menuitem id="menu_beauty_config_lost_reason" 
+              name="Lý do thất bại" 
+              parent="menu_beauty_configuration" 
+              action="crm.crm_lost_reason_action" 
+              sequence="50"/>
+              
+    <menuitem id="menu_beauty_config_users" 
+              name="Phân quyền người dùng" 
+              parent="menu_beauty_configuration" 
+              action="base.action_res_users" 
+              sequence="60"
+              groups="ht_beauty_core.beauty_group_admin"/>
+              
+    <menuitem id="menu_beauty_config_settings" 
+              name="Cài đặt vận hành" 
+              parent="menu_beauty_configuration" 
+              sequence="70"
+              groups="ht_beauty_core.beauty_group_admin"/>
+</odoo>

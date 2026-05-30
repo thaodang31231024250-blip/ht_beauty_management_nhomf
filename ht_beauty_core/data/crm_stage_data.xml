@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Giai đoạn 1: Tiếp nhận tư vấn (Dành cho các Lead thô vừa được duyệt đủ điều kiện chuyển qua) -->
+        <function model="crm.stage" name="write">
+            <value eval="[ref('crm.stage_lead1')]"/>
+            <value eval="{'name': 'Tiếp nhận tư vấn', 'sequence': 1}"/>
+        </function>
+        
+        <!-- Giai đoạn 2: Đang tư vấn (Khách đang tương tác, nhận báo giá, tìm hiểu dịch vụ) -->
+        <function model="crm.stage" name="write">
+            <value eval="[ref('crm.stage_lead2')]"/>
+            <value eval="{'name': 'Đang tư vấn', 'sequence': 2}"/>
+        </function>
+        
+        <!-- Giai đoạn 3: Nuôi dưỡng (Khách chưa chốt ngay, cần chăm sóc thêm theo thời gian) -->
+        <function model="crm.stage" name="write">
+            <value eval="[ref('crm.stage_lead3')]"/>
+            <value eval="{'name': 'Nuôi dưỡng', 'sequence': 3}"/>
+        </function>
+        
+        <!-- Giai đoạn 4: Đã đặt lịch hẹn (Mục tiêu cuối cùng của Pipeline - Đánh dấu là Thành công) -->
+        <function model="crm.stage" name="write">
+            <value eval="[ref('crm.stage_lead4')]"/>
+            <value eval="{'name': 'Đã đặt lịch hẹn', 'sequence': 4, 'is_won': True}"/>
+        </function>
+    </data>
+</odoo>

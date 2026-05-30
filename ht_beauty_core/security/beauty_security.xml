@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="module_category_ht_beauty" model="ir.module.category">
+            <field name="name">HT Beauty</field>
+            <field name="description">Quản lý quyền truy cập hệ thống HT Beauty</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="privilege_ht_beauty_roles" model="res.groups.privilege">
+            <field name="name">Vai trò (Roles)</field>
+            <field name="category_id" ref="module_category_ht_beauty"/>
+        </record>
+
+        <record id="beauty_group_receptionist" model="res.groups">
+            <field name="name">Lễ tân</field>
+            <field name="privilege_id" ref="privilege_ht_beauty_roles"/>
+        </record>
+
+        <record id="beauty_group_ktv" model="res.groups">
+            <field name="name">Kỹ thuật viên</field>
+            <field name="privilege_id" ref="privilege_ht_beauty_roles"/>
+        </record>
+
+        <record id="beauty_group_doctor" model="res.groups">
+            <field name="name">Bác sĩ</field>
+            <field name="privilege_id" ref="privilege_ht_beauty_roles"/>
+        </record>
+
+        <record id="beauty_group_cskh" model="res.groups">
+            <field name="name">Chăm sóc khách hàng (CSKH)</field>
+            <field name="privilege_id" ref="privilege_ht_beauty_roles"/>
+        </record>
+
+        <record id="beauty_group_manager" model="res.groups">
+            <field name="name">Quản lý</field>
+            <field name="privilege_id" ref="privilege_ht_beauty_roles"/>
+            <field name="implied_ids" eval="[(4, ref('beauty_group_receptionist')), (4, ref('beauty_group_cskh'))]"/>
+        </record>
+
+        <record id="beauty_group_admin" model="res.groups">
+            <field name="name">Quản trị hệ thống</field>
+            <field name="privilege_id" ref="privilege_ht_beauty_roles"/>
+            <field name="implied_ids" eval="[(4, ref('beauty_group_manager')), (4, ref('beauty_group_doctor'))]"/>
+        </record>
+    </data>
+</odoo>

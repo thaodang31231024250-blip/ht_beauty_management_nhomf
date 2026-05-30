@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_beauty_appointment_manager,beauty.appointment manager,model_beauty_appointment,ht_beauty_core.beauty_group_manager,1,1,1,1
+access_beauty_appointment_receptionist,beauty.appointment receptionist,model_beauty_appointment,ht_beauty_core.beauty_group_receptionist,1,1,1,0
+access_beauty_appointment_doctor,beauty.appointment doctor,model_beauty_appointment,ht_beauty_core.beauty_group_doctor,1,0,0,0
+access_beauty_appointment_ktv,beauty.appointment ktv,model_beauty_appointment,ht_beauty_core.beauty_group_ktv,1,0,0,0

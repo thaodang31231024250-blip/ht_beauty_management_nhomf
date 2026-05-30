@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="beauty_room_dieu_tri_da" model="beauty.room">
+            <field name="name">Phòng Điều trị da</field>
+            <field name="code">P_DA</field>
+            <field name="capacity">2</field> <field name="status">available</field>
+        </record>
+
+        <record id="beauty_room_dieu_tri_mun" model="beauty.room">
+            <field name="name">Phòng Điều trị mụn</field>
+            <field name="code">P_MUN</field>
+            <field name="capacity">3</field>
+            <field name="status">available</field>
+        </record>
+
+        <record id="beauty_room_nang_co" model="beauty.room">
+            <field name="name">Phòng Nâng cơ - Trẻ hóa</field>
+            <field name="code">P_NANGCO</field>
+            <field name="capacity">1</field>
+            <field name="status">available</field>
+        </record>
+
+        <record id="beauty_room_triet_long" model="beauty.room">
+            <field name="name">Phòng Triệt lông</field>
+            <field name="code">P_TRIETLONG</field>
+            <field name="capacity">2</field>
+            <field name="status">available</field>
+        </record>
+
+        <record id="beauty_room_cham_soc" model="beauty.room">
+            <field name="name">Phòng Chăm sóc - Phục hồi</field>
+            <field name="code">P_CHAMSOC</field>
+            <field name="capacity">4</field>
+            <field name="status">available</field>
+        </record>
+    </data>
+</odoo>

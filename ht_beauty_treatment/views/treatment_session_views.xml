@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_beauty_treatment_session_list" model="ir.ui.view">
+        <field name="name">beauty.treatment.session.list</field>
+        <field name="model">beauty.treatment.session</field>
+        <field name="arch" type="xml">
+            <list string="Nhật ký điều trị">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="plan_id"/>
+                <field name="ktv_id"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_beauty_treatment_session_form" model="ir.ui.view">
+        <field name="name">beauty.treatment.session.form</field>
+        <field name="model">beauty.treatment.session</field>
+        <field name="arch" type="xml">
+            <form string="Nhật ký buổi điều trị">
+                <header>
+                    <button name="action_mark_done" string="Hoàn thành" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="plan_id" readonly="state != 'draft'"/>
+                            <field name="partner_id"/>
+                            <field name="appointment_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="ktv_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Nhật ký &amp; Ghi chú">
+                            <field name="clinical_notes" placeholder="Tình trạng da, phản ứng khách hàng, thông số máy..."/>
+                        </page>
+                        <page string="Hình ảnh Before/After">
+                            <group>
+                                <!-- Strict Odoo 19 Option boolean capitalization -->
+                                <field name="before_image" widget="image" options="{'size': [256, 256]}"/>
+                                <field name="after_image" widget="image" options="{'size': [256, 256]}"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_beauty_treatment_session" model="ir.actions.act_window">
+        <field name="name">Nhật ký điều trị</field>
+        <field name="res_model">beauty.treatment.session</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="ht_beauty_core.menu_beauty_treatment_diary" 
+              name="Nhật ký điều trị"
+              parent="ht_beauty_core.menu_beauty_treatment"
+              action="action_beauty_treatment_session"
+              sequence="30"/>
+</odoo>

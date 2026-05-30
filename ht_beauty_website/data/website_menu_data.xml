@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <delete model="website.menu" search="[('url', '=', '/services')]"/>
+        <delete model="website.menu" search="[('url', '=', '/dich-vu')]"/>
+        <delete model="website.menu" search="[('url', '=', '/contactus')]"/>
+        <delete model="website.menu" search="[('url', '=', '/lien-he')]"/>
+
+        <record id="menu_services_ht_beauty" model="website.menu">
+            <field name="name">Dịch Vụ</field>
+            <field name="url">/dich-vu</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">50</field>
+        </record>
+
+        <record id="menu_contact_us_ht_beauty" model="website.menu">
+            <field name="name">Liên Hệ</field>
+            <field name="url">/lien-he</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">99</field>
+        </record>
+    </data>
+</odoo>

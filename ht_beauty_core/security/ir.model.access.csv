@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_beauty_room_receptionist,beauty.room.receptionist,model_beauty_room,beauty_group_receptionist,1,0,0,0
+access_beauty_room_manager,beauty.room.manager,model_beauty_room,beauty_group_manager,1,1,1,0
+access_beauty_room_admin,beauty.room.admin,model_beauty_room,beauty_group_admin,1,1,1,1

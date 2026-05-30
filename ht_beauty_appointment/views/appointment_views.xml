@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="seq_beauty_appointment" model="ir.sequence">
+        <field name="name">Beauty Appointment Sequence</field>
+        <field name="code">beauty.appointment</field>
+        <field name="prefix">APT/%(y)s/%(month)s/</field>
+        <field name="padding">4</field>
+    </record>
+
+    <record id="view_beauty_appointment_form" model="ir.ui.view">
+        <field name="name">beauty.appointment.form</field>
+        <field name="model">beauty.appointment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" string="Xác nhận" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_arrive" string="Khách đến" type="object" class="oe_highlight" invisible="state != 'confirmed'"/>
+                    <button name="action_in_progress" string="Thực hiện" type="object" class="oe_highlight" invisible="state != 'arrived'"/>
+                    <button name="action_done" string="Hoàn thành" type="object" class="oe_highlight" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Hủy" type="object" invisible="state in ('done', 'cancelled', 'no_show')"/>
+                    <button name="action_no_show" string="Vắng mặt (No-Show)" type="object" class="btn-danger" invisible="state != 'confirmed'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,arrived,in_progress,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="customer_id"/> 
+                            <field name="category_id" options="{'no_create': True}"/>
+                            <field name="service_id" domain="[('type', '=', 'service'), ('categ_id', '=?', category_id)]" options="{'no_create': True}"/>
+                            <field name="appointment_type" widget="radio" options="{'horizontal': True}"/>
+                            <field name="doctor_id" invisible="appointment_type != 'consultation'" required="appointment_type == 'consultation'"/>
+                            <field name="ktv_id" invisible="appointment_type != 'treatment'" required="appointment_type == 'treatment'"/>
+                        </group>
+                        <group>
+                            <field name="room_id"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ghi chú">
+                            <field name="notes" placeholder="Ghi chú thêm về lịch hẹn..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_beauty_appointment_list" model="ir.ui.view">
+        <field name="name">beauty.appointment.list</field>
+        <field name="model">beauty.appointment</field>
+        <field name="arch" type="xml">
+            <list string="Lịch hẹn" decoration-info="state == 'confirmed'" decoration-success="state == 'done'" decoration-muted="state == 'cancelled'">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="appointment_type"/>
+                <field name="doctor_id" optional="show"/>
+                <field name="ktv_id" optional="show"/>
+                <field name="room_id"/>
+                <field name="start_time"/>
+                <field name="state" widget="badge" decoration-info="state == 'confirmed'" decoration-warning="state == 'arrived'" decoration-primary="state == 'in_progress'" decoration-success="state == 'done'" decoration-danger="state == 'no_show'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_beauty_appointment_search" model="ir.ui.view">
+        <field name="name">beauty.appointment.search</field>
+        <field name="model">beauty.appointment</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Lịch hẹn">
+                <field name="name" string="Mã lịch hẹn"/>
+                <field name="customer_id" string="Khách hàng"/>
+                <field name="doctor_id" string="Bác sĩ"/>
+                <field name="ktv_id" string="KTV"/>
+                <field name="room_id" string="Phòng"/>
+                
+                <separator/>
+                <filter string="Chưa hoàn thành" name="filter_not_done" domain="[('state', 'in', ['draft', 'confirmed', 'arrived', 'in_progress'])]"/>
+                <filter string="Vắng mặt (No-Show)" name="filter_no_show" domain="[('state', '=', 'no_show')]"/>
+                <separator/>
+                
+                <filter string="Khách hàng" name="group_by_customer" context="{'group_by': 'customer_id'}"/>
+                <filter string="Phòng điều trị" name="group_by_room" context="{'group_by': 'room_id'}"/>
+                <filter string="Bác sĩ" name="group_by_doctor" context="{'group_by': 'doctor_id'}"/>
+                <filter string="Kỹ thuật viên" name="group_by_ktv" context="{'group_by': 'ktv_id'}"/>
+                <filter string="Trạng thái" name="group_by_state" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_beauty_appointment_kanban" model="ir.ui.view">
+        <field name="name">beauty.appointment.kanban</field>
+        <field name="model">beauty.appointment</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" default_group_by="state" records_draggable="false">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="appointment_type"/>
+                <field name="doctor_id"/>
+                <field name="ktv_id"/>
+                <field name="room_id"/>
+                <field name="start_time"/>
+                <field name="state"/>
+                <field name="service_id"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="row mb-1">
+                            <div class="col-8">
+                                <strong><field name="name"/></strong>
+                            </div>
+                            <div class="col-4 text-end">
+                                <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'confirmed': 'info', 'arrived': 'warning', 'in_progress': 'primary', 'done': 'success', 'no_show': 'danger', 'cancelled': 'danger'}}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <i class="fa fa-user me-1"/> <field name="customer_id"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <i class="fa fa-calendar me-1"/> <field name="start_time"/>
+                            </div>
+                            <div class="col-6">
+                                <i class="fa fa-building me-1"/> <field name="room_id"/>
+                            </div>
+                        </div>
+                        <div class="row" t-if="record.service_id.value">
+                            <div class="col-12">
+                                <i class="fa fa-tag me-1"/> <field name="service_id"/>
+                            </div>
+                        </div>
+                        <div class="row" t-if="record.doctor_id.value">
+                            <div class="col-12">
+                                <i class="fa fa-user-md me-1"/> BS: <field name="doctor_id"/>
+                            </div>
+                        </div>
+                        <div class="row" t-if="record.ktv_id.value">
+                            <div class="col-12">
+                                <i class="fa fa-wrench me-1"/> KTV: <field name="ktv_id"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_beauty_appointment_calendar" model="ir.ui.view">
+        <field name="name">beauty.appointment.calendar</field>
+        <field name="model">beauty.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Lịch hẹn" date_start="start_time" date_stop="end_time" color="state" mode="week" event_open_popup="true">
+                <field name="customer_id"/>
+                <field name="appointment_type"/>
+                <field name="room_id"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_beauty_appointment_calendar_room" model="ir.ui.view">
+        <field name="name">beauty.appointment.calendar.room</field>
+        <field name="model">beauty.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Lịch Phòng Điều Trị" date_start="start_time" date_stop="end_time" color="room_id" mode="week" event_open_popup="true">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="appointment_type"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_beauty_appointment_calendar_personnel" model="ir.ui.view">
+        <field name="name">beauty.appointment.calendar.personnel</field>
+        <field name="model">beauty.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Lịch Nhân Sự" date_start="start_time" date_stop="end_time" color="doctor_id" mode="week" event_open_popup="true">
+                <field name="name"/>
+                <field name="customer_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="action_beauty_appointment_calendar_view" model="ir.actions.act_window">
+        <field name="name">Lịch hẹn</field>
+        <field name="res_model">beauty.appointment</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Tạo lịch hẹn mới cho khách hàng!</p>
+        </field>
+    </record>
+
+    <record id="action_beauty_appointment_list_view" model="ir.actions.act_window">
+        <field name="name">Danh sách lịch hẹn</field>
+        <field name="res_model">beauty.appointment</field>
+        <field name="view_mode">kanban,list,calendar,form</field>
+    </record>
+
+    <record id="action_beauty_calendar_room" model="ir.actions.act_window">
+        <field name="name">Quản lý Lịch Phòng</field>
+        <field name="res_model">beauty.appointment</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="domain">[('state', '!=', 'cancelled')]</field> 
+    </record>
+
+    <record id="action_bind_calendar_room" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="view_beauty_appointment_calendar_room"/>
+        <field name="act_window_id" ref="action_beauty_calendar_room"/>
+    </record>
+
+    <record id="action_beauty_calendar_personnel" model="ir.actions.act_window">
+        <field name="name">Quản lý Lịch Nhân Sự</field>
+        <field name="res_model">beauty.appointment</field>
+        <field name="view_mode">calendar,list,form</field>
+        <field name="domain">[('state', '!=', 'cancelled')]</field>
+    </record>
+
+    <record id="action_bind_calendar_personnel" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="view_beauty_appointment_calendar_personnel"/>
+        <field name="act_window_id" ref="action_beauty_calendar_personnel"/>
+    </record>
+
+    <record id="action_beauty_appointment_cancelled" model="ir.actions.act_window">
+        <field name="name">Lịch hẹn đã hủy</field>
+        <field name="res_model">beauty.appointment</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="domain">[('state', '=', 'cancelled')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">Hiện tại không có lịch hẹn nào bị hủy.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_beauty_appointment_list" name="Danh sách lịch hẹn" parent="ht_beauty_core.menu_beauty_appointments_main" action="action_beauty_appointment_list_view" sequence="10"/>
+    <menuitem id="menu_beauty_resource_room" name="Theo dõi lịch phòng" parent="ht_beauty_core.menu_beauty_appointments_main" action="action_beauty_calendar_room" sequence="20"/>
+    <menuitem id="menu_beauty_resource_personnel" name="Theo dõi lịch nhân sự" parent="ht_beauty_core.menu_beauty_appointments_main" action="action_beauty_calendar_personnel" sequence="30"/>
+    <menuitem id="menu_beauty_appointment_cancelled" name="Lịch hẹn đã hủy" parent="ht_beauty_core.menu_beauty_appointments_main" action="action_beauty_appointment_cancelled" sequence="40"/>
+
+</odoo>

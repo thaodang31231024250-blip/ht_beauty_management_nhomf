@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="categ_dieu_tri_da" model="product.category">
+            <field name="name">Điều trị da</field>
+        </record>
+        
+        <record id="categ_dieu_tri_mun" model="product.category">
+            <field name="name">Điều trị mụn</field>
+        </record>
+
+        <record id="categ_nang_co" model="product.category">
+            <field name="name">Nâng cơ - Trẻ hóa da</field>
+        </record>
+
+        <record id="categ_triet_long" model="product.category">
+            <field name="name">Triệt lông vĩnh viễn</field>
+        </record>
+
+        <record id="categ_cham_soc" model="product.category">
+            <field name="name">Chăm sóc - Phục hồi da</field>
+        </record>
+
+        <record id="service_tri_seo_gloval_cx3" model="product.product">
+            <field name="name">Trị Sẹo Công Nghệ Gloval CX3</field>
+            <field name="type">service</field>
+            <field name="list_price">1500000</field>
+            <field name="categ_id" ref="categ_dieu_tri_da"/> </record>
+        
+        <record id="service_tri_nam_ultra_micro" model="product.product">
+            <field name="name">Trị Nám Ultra Micro Touch</field>
+            <field name="type">service</field>
+            <field name="list_price">2000000</field>
+            <field name="categ_id" ref="categ_dieu_tri_da"/>
+        </record>
+        
+        <record id="service_tri_viem_nang_long" model="product.product">
+            <field name="name">Trị Viêm Nang Lông Fusion Therapy / CO2 Fractional</field>
+            <field name="type">service</field>
+            <field name="list_price">1200000</field>
+            <field name="categ_id" ref="categ_dieu_tri_da"/>
+        </record>
+
+        <record id="service_tri_mun_green_laser" model="product.product">
+            <field name="name">Trị Mụn Mặt Green Laser</field>
+            <field name="type">service</field>
+            <field name="list_price">450000</field>
+            <field name="categ_id" ref="categ_dieu_tri_mun"/> </record>
+        
+        <record id="service_tri_mun_ht_skin" model="product.product">
+            <field name="name">Trị Mụn HT Skin</field>
+            <field name="type">service</field>
+            <field name="list_price">350000</field>
+            <field name="categ_id" ref="categ_dieu_tri_mun"/>
+        </record>
+
+        <record id="service_nang_co_ultherapy" model="product.product">
+            <field name="name">Nâng Cơ Trẻ Hoá Da Ultherapy</field>
+            <field name="type">service</field>
+            <field name="list_price">5000000</field>
+            <field name="categ_id" ref="categ_nang_co"/> </record>
+
+        <record id="service_nang_co_thermage" model="product.product">
+            <field name="name">Nâng Cơ Xóa Nhăn Thermage Duet RF</field>
+            <field name="type">service</field>
+            <field name="list_price">4500000</field>
+            <field name="categ_id" ref="categ_nang_co"/>
+        </record>
+
+        <record id="service_tan_mo_nong_cam" model="product.product">
+            <field name="name">Tan Mỡ Nọng Cằm Therapy Wine</field>
+            <field name="type">service</field>
+            <field name="list_price">2500000</field>
+            <field name="categ_id" ref="categ_nang_co"/>
+        </record>
+
+        <record id="service_triet_long_removal_cooling" model="product.product">
+            <field name="name">Triệt Lông Nữ Removal Cooling (Đá lạnh Sapphire)</field>
+            <field name="type">service</field>
+            <field name="list_price">800000</field>
+            <field name="categ_id" ref="categ_triet_long"/> </record>
+
+        <record id="service_triet_long_nam" model="product.product">
+            <field name="name">Triệt Lông Nam Giới</field>
+            <field name="type">service</field>
+            <field name="list_price">1000000</field>
+            <field name="categ_id" ref="categ_triet_long"/>
+        </record>
+
+        <record id="service_cham_soc_ht_triad" model="product.product">
+            <field name="name">Chăm Sóc Da Cơ Bản HT Triad Facial (10 Bước)</field>
+            <field name="type">service</field>
+            <field name="list_price">349000</field>
+            <field name="categ_id" ref="categ_cham_soc"/> </record>
+
+        <record id="service_cham_soc_jetclear" model="product.product">
+            <field name="name">Chăm Sóc Tầng Sâu Jetclear</field>
+            <field name="type">service</field>
+            <field name="list_price">799000</field>
+            <field name="categ_id" ref="categ_cham_soc"/>
+        </record>
+
+        <record id="service_phuc_hoi_egf" model="product.product">
+            <field name="name">Phục Hồi Da Hư Tổn Tinh Chất EGF</field>
+            <field name="type">service</field>
+            <field name="list_price">1200000</field>
+            <field name="categ_id" ref="categ_cham_soc"/>
+        </record>
+
+        <record id="service_tam_trang_nano" model="product.product">
+            <field name="name">Tắm Trắng HT Nano White</field>
+            <field name="type">service</field>
+            <field name="list_price">1500000</field>
+            <field name="categ_id" ref="categ_cham_soc"/>
+        </record>
+
+    </data>
+</odoo>

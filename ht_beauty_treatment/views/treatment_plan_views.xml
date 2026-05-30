@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_beauty_treatment_plan_list" model="ir.ui.view">
+        <field name="name">beauty.treatment.plan.list</field>
+        <field name="model">beauty.treatment.plan</field>
+        <field name="arch" type="xml">
+            <list string="Phác đồ điều trị" decoration-info="state == 'draft'" decoration-success="state == 'completed'">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="doctor_id"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="session_count" string="Số buổi"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_beauty_treatment_plan_form" model="ir.ui.view">
+        <field name="name">beauty.treatment.plan.form</field>
+        <field name="model">beauty.treatment.plan</field>
+        <field name="arch" type="xml">
+            <form string="Phác đồ điều trị">
+                <header>
+                    <button name="action_confirm" string="Bắt đầu điều trị" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_done" string="Hoàn thành" type="object" class="oe_highlight" invisible="state != 'active'"/>
+                    <button name="action_open_bulk_appointment" string="📅 Xếp lịch hàng loạt" type="object" class="oe_highlight" invisible="state != 'active'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,active,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_sessions" icon="fa-book">
+                            <field name="session_count" widget="statinfo" string="Nhật ký"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" readonly="state != 'draft'"/>
+                            <field name="doctor_id"/>
+                            <field name="category_id" options="{'no_create': True}"/>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Chi tiết phác đồ">
+                            <field name="line_ids" widget="section_and_note_one2many">
+                                <list editable="bottom">
+                                    <control>
+                                        <create name="add_product_control" string="Thêm dịch vụ"/>
+                                        <create name="add_section_control" string="Thêm phần" context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Thêm ghi chú" context="{'default_display_type': 'line_note'}"/>
+                                    </control>
+                                    <field name="display_type" column_invisible="True"/>
+                                    <field name="product_id" invisible="display_type in ('line_section', 'line_note')"/>
+                                    <field name="name" widget="section_and_note_text"/>
+                                    <field name="quantity" invisible="display_type in ('line_section', 'line_note')"/>
+                                    <field name="price_unit" invisible="display_type in ('line_section', 'line_note')"/>
+                                    <field name="price_subtotal" readonly="1" force_save="1" invisible="display_type in ('line_section', 'line_note')"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Nhật ký các buổi">
+                            <field name="session_ids" context="{'default_partner_id': partner_id}">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="date"/>
+                                    <field name="appointment_id"/>
+                                    <field name="ktv_id"/>
+                                    <field name="state" widget="badge"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_beauty_treatment_plan_search" model="ir.ui.view">
+        <field name="name">beauty.treatment.plan.search</field>
+        <field name="model">beauty.treatment.plan</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Phác đồ">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="doctor_id"/>
+                <field name="tag_ids"/>
+                <filter string="Khách hàng" name="group_partner" context="{'group_by': 'partner_id'}"/>
+                <filter string="Bác sĩ" name="group_doctor" context="{'group_by': 'doctor_id'}"/>
+                <filter string="Trạng thái" name="group_state" context="{'group_by': 'state'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_beauty_treatment_plan" model="ir.actions.act_window">
+        <field name="name">Phác đồ điều trị</field>
+        <field name="res_model">beauty.treatment.plan</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_beauty_treatment_plan_search"/>
+    </record>
+
+    <menuitem id="ht_beauty_core.menu_beauty_treatment_plan"
+              name="Phác đồ điều trị"
+              parent="ht_beauty_core.menu_beauty_treatment"
+              action="action_beauty_treatment_plan"
+              sequence="10"/>
+</odoo>
