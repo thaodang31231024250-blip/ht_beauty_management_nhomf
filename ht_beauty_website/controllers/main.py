@@ -4,6 +4,13 @@ from odoo.http import request
 _logger = logging.getLogger(__name__)
 class HTBeautyWebsite(http.Controller):
     # ------------------------------------------------------------------ #
+    #  TRANG CHỦ                                                         #
+    # ------------------------------------------------------------------ #
+    @http.route('/', type='http', auth='public', website=True, sitemap=True)
+    def index(self, **kwargs):
+        return request.render('ht_beauty_website.ht_beauty_homepage', {})
+
+    # ------------------------------------------------------------------ #
     #  TRANG LIÊN HỆ                                                       #
     # ------------------------------------------------------------------ #
     @http.route('/lien-he', type='http', auth='public', website=True)
