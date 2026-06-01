@@ -1,5 +1,5 @@
 {
-    'name': 'Hệ sinh thái Quản lý HT Beauty',
+    'name': 'Hệ sinh thái Quản lý Viện thẩm mỹ HT Beauty',
     'version': '1.0',
     'category': 'HT Beauty',
     'summary': 'Cài đặt toàn bộ 5 phân hệ (Core, Appointment, Treatment, Automation, Website)',
