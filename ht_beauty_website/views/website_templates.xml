@@ -3,7 +3,7 @@
     <!-- ============================================== -->
     <!-- 1. TRANG CHỦ                                   -->
     <!-- ============================================== -->
-    <template id="website.homepage" name="Homepage">
+    <template id="ht_beauty_homepage" name="HT Beauty Homepage">
         <t t-call="website.layout">
             <t t-set="pageName" t-value="'homepage'"/>
             <div id="wrap" class="oe_structure">
@@ -169,7 +169,7 @@
                             <!-- Cột Trái -->
                             <div class="col-lg-5 mb-5 pe-lg-5 o_colored_level">
                                 <!-- Ảnh Logo Cty -->
-                                <img src="/ht_beauty_website/static/img/ht_logo.png" alt="HT Beauty Logo" class="img img-fluid mb-4" style="max-height: 120px;"/>
+                                <img src="/ht_beauty_website/static/img/ht_logo.jpg" alt="HT Beauty Logo" class="img img-fluid mb-4" style="max-height: 120px;"/>
                                 <h3 class="font-weight-bold mb-3" style="color: #333;">CÔNG TY TNHH TM DV TRƯƠNG HOÀNG THI</h3>
                                 <p class="lead text-muted mb-4" style="font-size: 16px;">Viện Thẩm Mỹ HT - Nơi đánh thức và thăng hoa nhan sắc.</p>
                                 <ul class="list-unstyled" style="line-height: 2.5; color: #555;">
@@ -260,7 +260,7 @@
                     
                     <!-- 1. Logo cứng -->
                     <a href="/" class="navbar-brand logo me-4">
-                        <img src="/ht_beauty_website/static/img/ht_logo.png" alt="HT Beauty" style="max-height: 55px;"/>
+                        <img src="/ht_beauty_website/static/img/ht_logo.jpg" alt="HT Beauty" style="max-height: 55px;"/>
                     </a>
                     
                     <!-- Nút mở menu trên Mobile -->
