@@ -17,7 +17,7 @@ class BeautyAppointment(models.Model):
         ('treatment', 'Điều trị')
     ], string='Loại lịch hẹn', required=True, default='consultation', tracking=True)
     
-    # Domains defined matching your hr.employee extensions in core
+    # Domains defined matching your hr.employee extensions in core.
     doctor_id = fields.Many2one('hr.employee', string='Bác sĩ', domain=[('role_type', '=', 'doctor')], tracking=True)
     ktv_id = fields.Many2one('hr.employee', string='Kỹ thuật viên (KTV)', domain=[('role_type', '=', 'ktv')], tracking=True)
     

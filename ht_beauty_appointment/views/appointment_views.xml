@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="seq_beauty_appointment" model="ir.sequence">
-        <field name="name">Beauty Appointment Sequence</field>
-        <field name="code">beauty.appointment</field>
-        <field name="prefix">APT/%(y)s/%(month)s/</field>
-        <field name="padding">4</field>
-    </record>
+    <data noupdate="1">
+        <record id="seq_beauty_appointment" model="ir.sequence">
+            <field name="name">Beauty Appointment Sequence</field>
+            <field name="code">beauty.appointment</field>
+            <field name="prefix">APT/%(y)s/%(month)s/</field>
+            <field name="padding">4</field>
+        </record>
+    </data>
 
     <record id="view_beauty_appointment_form" model="ir.ui.view">
         <field name="name">beauty.appointment.form</field>
@@ -46,11 +48,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
