@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, _
 from datetime import timedelta
-from markupsafe import Markup  # Bổ sung thư viện Markup để render HTML
+<<<<<<< HEAD
+=======
+from markupsafe import Markup  
+>>>>>>> feature/ht_beauty_automation
 import pytz
 
 class BeautyAppointmentAutomation(models.Model):
     _inherit = 'beauty.appointment'
 
-    # Các cờ kiểm soát Cron job không chạy lặp lại
     reminder_sent = fields.Boolean(string='Đã gửi nhắc hẹn', default=False, tracking=True)
     late_alert_sent = fields.Boolean(string='Đã cảnh báo trễ', default=False, tracking=True)
 
@@ -25,7 +27,6 @@ class BeautyAppointmentAutomation(models.Model):
         return res
 
     def _get_formatted_time(self):
-        """Chuyển đổi giờ từ hệ thống (UTC) sang giờ Việt Nam (Asia/Ho_Chi_Minh)"""
         if not self.start_time:
             return ''
         user_tz = pytz.timezone(self.env.user.tz or 'Asia/Ho_Chi_Minh')
@@ -33,7 +34,10 @@ class BeautyAppointmentAutomation(models.Model):
         return local_time.strftime('%H:%M ngày %d/%m/%Y')
 
     def _simulate_auto_send_message(self, msg_type):
+<<<<<<< HEAD
         """Mô phỏng hệ thống nhắn tin bằng cách in log vào Chatter"""
+=======
+>>>>>>> feature/ht_beauty_automation
         app_time = self._get_formatted_time()
         customer_name = self.customer_id.name or 'Quý khách'
 
@@ -67,6 +71,7 @@ class BeautyAppointmentAutomation(models.Model):
         )
 
     def _notify_staff_arrival(self):
+<<<<<<< HEAD
         """Giao việc (Task) cho nhân sự chuyên môn khi khách tới cửa"""
         users_to_notify = []
         if self.doctor_id and self.doctor_id.user_id:
@@ -98,6 +103,50 @@ class BeautyAppointmentAutomation(models.Model):
         end_of_tomorrow_local = tomorrow_local.replace(hour=23, minute=59, second=59, microsecond=0)
         
         # Quy đổi ngược lại về UTC để Database của Odoo có thể tìm kiếm đúng
+=======
+        """Giao việc (Task) cho nhân sự chuyên môn khi khách tới cửa (Bản có chẩn đoán lỗi)"""
+        for rec in self:
+            staff_members = []
+            if rec.doctor_id:
+                staff_members.append(('Bác sĩ', rec.doctor_id))
+            if rec.ktv_id:
+                staff_members.append(('Kỹ thuật viên', rec.ktv_id))
+            
+            for role, staff in staff_members:
+                # Kiểm tra xem nhân viên đã được gắn User đăng nhập chưa
+                if staff.user_id:
+                    # 1. Tạo Activity Task To-do
+                    rec.activity_schedule(
+                        'mail.mail_activity_data_todo',
+                        summary=f'[{role}] Khách hàng đã đến - Vui lòng tiếp đón',
+                        note=f'Khách hàng <b>{rec.customer_id.name}</b> đã check-in. Vui lòng chuẩn bị phòng <b>{rec.room_id.name or "điều trị"}</b>.',
+                        user_id=staff.user_id.id
+                    )
+                    # 2. Bắn log báo thành công vào Chatter và Tag tên để 100% có chuông thông báo
+                    rec.message_post(
+                        body=Markup(f"🔔 Đã tự động giao việc cho {role}: <b>@{staff.user_id.name}</b> ra đón khách."),
+                        message_type='notification',
+                        subtype_xmlid='mail.mt_note'
+                    )
+                else:
+                    # 3. NẾU LỖI THIẾU TÀI KHOẢN -> BÁO ĐỎ NGAY LẬP TỨC TRÊN CHATTER
+                    rec.message_post(
+                        body=Markup(f"<div style='color: red;'>⚠️ <b>HỆ THỐNG TỪ CHỐI GIAO VIỆC:</b> Không thể gửi thông báo cho {role} <b>{staff.name}</b> vì nhân sự này chưa được liên kết với tài khoản đăng nhập (User). Lễ tân vui lòng gọi điện trực tiếp để báo khách đến!</div>"),
+                        message_type='notification',
+                        subtype_xmlid='mail.mt_note'
+                    )
+
+    @api.model
+    def _cron_remind_upcoming_appointments(self):
+        now_utc = fields.Datetime.now()
+        user_tz = pytz.timezone(self.env.user.tz or 'Asia/Ho_Chi_Minh')
+        now_local = pytz.utc.localize(now_utc).astimezone(user_tz)
+        tomorrow_local = now_local + timedelta(days=1)
+        
+        start_of_tomorrow_local = tomorrow_local.replace(hour=0, minute=0, second=0, microsecond=0)
+        end_of_tomorrow_local = tomorrow_local.replace(hour=23, minute=59, second=59, microsecond=0)
+        
+>>>>>>> feature/ht_beauty_automation
         utc_start = start_of_tomorrow_local.astimezone(pytz.utc).replace(tzinfo=None)
         utc_end = end_of_tomorrow_local.astimezone(pytz.utc).replace(tzinfo=None)
         
