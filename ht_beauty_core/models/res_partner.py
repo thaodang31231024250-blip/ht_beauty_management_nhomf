@@ -71,7 +71,7 @@ class ResPartner(models.Model):
     session_count = fields.Integer(string='Số buổi điều trị')
     next_appointment = fields.Date(string='Lịch hẹn tiếp theo')
     treatment_note = fields.Text(string='Ghi chú điều trị')
-
+    # Customer management feature
     # =========================
     # 5. KIỂM TRA TRÙNG SĐT
     # =========================

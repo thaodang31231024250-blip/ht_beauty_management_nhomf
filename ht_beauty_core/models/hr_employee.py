@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
 from odoo import models, fields
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
     role_type = fields.Selection([
+        ('manager', 'Quản lý'),
+        ('it', 'IT / Quản trị hệ thống'),
         ('doctor', 'Bác sĩ'),
         ('ktv', 'Kỹ thuật viên'),
         ('receptionist', 'Lễ tân'),
@@ -16,4 +19,4 @@ class HrEmployee(models.Model):
         ('nang_co_tre_hoa', 'Nâng cơ - Trẻ hóa da'),
         ('triet_long', 'Triệt lông vĩnh viễn'),
         ('cham_soc_da', 'Chăm sóc - Phục hồi da'),
-], string='Chuyên môn')
+    ], string='Chuyên môn')

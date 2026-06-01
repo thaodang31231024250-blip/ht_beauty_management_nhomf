@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <record id="promo_program_spa_10_percent" model="loyalty.program">
+            <field name="name">Ưu đãi 10% Dịch vụ Spa</field>
+            <field name="program_type">promotion</field>
+            <field name="applies_on">current</field>
+            <field name="trigger">auto</field>
+        </record>
+
+        <record id="promo_rule_spa_10_percent" model="loyalty.rule">
+            <field name="program_id" ref="promo_program_spa_10_percent"/>
+            <field name="minimum_qty">1</field>
+            <field name="reward_point_mode">order</field>
+            <field name="reward_point_amount">1</field>
+        </record>
+
+        <record id="promo_reward_spa_10_percent" model="loyalty.reward">
+            <field name="program_id" ref="promo_program_spa_10_percent"/>
+            <field name="reward_type">discount</field>
+            <field name="discount_mode">percent</field>
+            <field name="discount">10</field>
+            <field name="required_points">1</field>
+            <field name="description">Giảm 10% trên tổng hóa đơn Dịch vụ</field>
+        </record>
+
+        <record id="promo_program_voucher_200k" model="loyalty.program">
+            <field name="name">Voucher Tri ân Khách hàng (Giảm 200.000đ)</field>
+            <field name="program_type">coupons</field>
+            <field name="applies_on">current</field>
+            <field name="trigger">with_code</field>
+        </record>
+
+        <record id="promo_rule_voucher_200k" model="loyalty.rule">
+            <field name="program_id" ref="promo_program_voucher_200k"/>
+            <field name="minimum_amount">1000000</field>
+            <field name="minimum_qty">1</field>
+            <field name="reward_point_mode">order</field>
+            <field name="reward_point_amount">1</field>
+        </record>
+
+        <record id="promo_reward_voucher_200k" model="loyalty.reward">
+            <field name="program_id" ref="promo_program_voucher_200k"/>
+            <field name="reward_type">discount</field>
+            <field name="discount_mode">per_order</field>
+            <field name="discount">200000</field>
+            <field name="required_points">1</field>
+            <field name="description">Giảm trực tiếp 200.000đ (Áp dụng cho hóa đơn từ 1.000.000đ)</field>
+        </record>
+
+    </data>
+</odoo>

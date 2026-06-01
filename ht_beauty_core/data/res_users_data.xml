@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="user_ht_admin" model="res.users">
+            <field name="name">Lê Tuấn Khang (IT/Admin)</field>
+            <field name="login">admin@htbeauty.vn</field>
+            <field name="password">123456</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('ht_beauty_core.beauty_group_admin')])]"/>
+        </record>
+
+        <record id="user_ht_manager" model="res.users">
+            <field name="name">Trương Minh Trí (Quản lý)</field>
+            <field name="login">manager@htbeauty.vn</field>
+            <field name="password">123456</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('ht_beauty_core.beauty_group_manager')])]"/>
+        </record>
+
+        <record id="user_ht_doctor" model="res.users">
+            <field name="name">BS. Nguyễn Hoàng Bách</field>
+            <field name="login">doctor@htbeauty.vn</field>
+            <field name="password">123456</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('ht_beauty_core.beauty_group_doctor')])]"/>
+        </record>
+
+        <record id="user_ht_ktv" model="res.users">
+            <field name="name">KTV. Võ Cẩm Nhung</field>
+            <field name="login">ktv@htbeauty.vn</field>
+            <field name="password">123456</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('ht_beauty_core.beauty_group_ktv')])]"/>
+        </record>
+
+        <record id="user_ht_receptionist" model="res.users">
+            <field name="name">Bùi Diễm Quỳnh (Lễ tân)</field>
+            <field name="login">receptionist@htbeauty.vn</field>
+            <field name="password">123456</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('ht_beauty_core.beauty_group_receptionist')])]"/>
+        </record>
+
+        <record id="user_ht_cskh" model="res.users">
+            <field name="name">Vũ Thu Thảo (CSKH)</field>
+            <field name="login">cskh@htbeauty.vn</field>
+            <field name="password">123456</field>
+            <field name="group_ids" eval="[(6, 0, [ref('base.group_user'), ref('ht_beauty_core.beauty_group_cskh')])]"/>
+        </record>
+
+    </data>
+</odoo>

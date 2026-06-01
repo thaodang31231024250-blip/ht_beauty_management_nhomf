@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="hr_employee_truong_minh_tri" model="hr.employee">
+            <field name="name">Trương Minh Trí</field>
+            <field name="role_type">manager</field>
+        </record>
+
+        <record id="hr_employee_le_tuan_khang" model="hr.employee">
+            <field name="name">Lê Tuấn Khang</field>
+            <field name="role_type">it</field>
+        </record>
+
+        <record id="hr_employee_dr_nguyen_hoang_bach" model="hr.employee">
+            <field name="name">BS. Nguyễn Hoàng Bách</field>
+            <field name="role_type">doctor</field>
+            <field name="specialization">dieu_tri_da</field>
+        </record>
+
+        <record id="hr_employee_dr_tran_kim_ngan" model="hr.employee">
+            <field name="name">BS. Trần Kim Ngân</field>
+            <field name="role_type">doctor</field>
+            <field name="specialization">nang_co_tre_hoa</field>
+        </record>
+
+        <record id="hr_employee_ktv_vo_cam_nhung" model="hr.employee">
+            <field name="name">KTV. Võ Cẩm Nhung</field>
+            <field name="role_type">ktv</field>
+            <field name="specialization">cham_soc_da</field>
+        </record>
+
+        <record id="hr_employee_ktv_dinh_thuy_vi" model="hr.employee">
+            <field name="name">KTV. Đinh Thúy Vi</field>
+            <field name="role_type">ktv</field>
+            <field name="specialization">triet_long</field>
+        </record>
+
+        <record id="hr_employee_ktv_ly_ngoc_han" model="hr.employee">
+            <field name="name">KTV. Lý Ngọc Hân</field>
+            <field name="role_type">ktv</field>
+            <field name="specialization">dieu_tri_mun</field>
+        </record>
+
+        <record id="hr_employee_bui_diem_quynh" model="hr.employee">
+            <field name="name">Bùi Diễm Quỳnh</field>
+            <field name="role_type">receptionist</field>
+        </record>
+
+        <record id="hr_employee_vu_thu_thao" model="hr.employee">
+            <field name="name">Vũ Thu Thảo</field>
+            <field name="role_type">cskh</field>
+        </record>
+
+        <record id="hr_employee_doan_hai_yen" model="hr.employee">
+            <field name="name">Đoàn Hải Yến</field>
+            <field name="role_type">cskh</field>
+        </record>
+    </data>
+</odoo>
