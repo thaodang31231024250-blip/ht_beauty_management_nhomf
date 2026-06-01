@@ -10,7 +10,11 @@
     '- Đặt lịch hẹn tư vấn và lịch hẹn điều trị'
     '- Điều phối tài nguyên'
     '- Các chức năng ngăn xung đột tài nguyên khi đặt lịch',
-    'depends': ['ht_beauty_core', 'mail'],
+    'depends': ['base', 
+        'ht_beauty_core', 
+        'mail',           
+        'product',        
+        'hr'],
     'data': [
         'security/ir.model.access.csv',
         'views/appointment_views.xml',
