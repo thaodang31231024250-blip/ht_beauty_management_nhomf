@@ -3,7 +3,8 @@ from odoo import models, fields, api
 class BeautyTreatmentSession(models.Model):
     _name = 'beauty.treatment.session'
     _description = 'Nhật ký buổi điều trị'
-    _inherit = ['mail.thread']
+    
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string='Tên buổi', required=True, placeholder="Ví dụ: Buổi 1 - Laser")
     plan_id = fields.Many2one('beauty.treatment.plan', string='Phác đồ', required=True, ondelete='cascade')

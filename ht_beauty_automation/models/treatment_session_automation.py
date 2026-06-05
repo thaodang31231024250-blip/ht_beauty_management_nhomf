@@ -17,7 +17,10 @@ class BeautyTreatmentSession(models.Model):
         cskh_group = self.env.ref('ht_beauty_core.beauty_group_cskh', raise_if_not_found=False)
         
        
-        cskh_users = self.env['res.users'].search([('groups_id', 'in', cskh_group.ids)]) if cskh_group else []
+        cskh_users = self.env['res.users'].search([('name', 'ilike', 'Thảo')], limit=1)
+        if not cskh_users:
+            cskh_users = self.env.user
+
         
         if cskh_users:
             assigned_user = cskh_users[0]

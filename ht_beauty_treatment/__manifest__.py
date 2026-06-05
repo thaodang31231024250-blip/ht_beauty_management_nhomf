@@ -10,7 +10,7 @@
         - Phân loại Tag & Dịch vụ
         - Nhật ký từng buổi
     """,
-    'depends': ['ht_beauty_core', 'sale_management', 'ht_beauty_appointment'],
+    'depends': ['ht_beauty_core', 'sale_management', 'ht_beauty_appointment', 'mail'],
     'data': [
         'security/ir.model.access.csv',
         'wizard/bulk_appointment_wizard_views.xml',
