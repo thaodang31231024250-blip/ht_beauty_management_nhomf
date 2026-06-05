@@ -23,7 +23,7 @@ HT Beauty Management System là bộ custom addons được phát triển trên 
 
 ## 🛠 Nền tảng Công nghệ
 
-* **Framework:** Odoo Community (VD: 19.0)
+* **Framework:** Odoo Community Phiên bản 19.0
 * **Ngôn ngữ:** Python 3.10+
 * **Cơ sở dữ liệu:** PostgreSQL
 * **Giao diện:** QWeb, XML
@@ -54,8 +54,7 @@ Sau khi kích hoạt, Odoo sẽ tự động:
 Các module được tự động triển khai bao gồm:
 
 ```text
-custom_addons
-├── ht_beauty_management
+ht_beauty_management
 ├── ht_beauty_core
 ├── ht_beauty_appointment
 ├── ht_beauty_treatment
