@@ -1,6 +1,11 @@
 <div align="center">
   <h1>🏥 HT Beauty Clinic Management System</h1>
   <p><b>Hệ thống Quản trị Viện thẩm mỹ Chuẩn Y khoa trên nền tảng Odoo ERP</b></p>
+  <br>
+
+  [![Hướng dẫn tải và demo thao tác app Quản lý Viện thẩm mỹ HT Beauty](https://img.youtube.com/vi/AOqt3BUsX_c/maxresdefault.jpg)](https://youtu.be/AOqt3BUsX_c)
+  
+  <p><i>📺 Click vào ảnh để xem video Hướng dẫn tải và Demo hệ thống</i></p>
 </div>
 
 ---
@@ -49,7 +54,8 @@ Sau khi kích hoạt, Odoo sẽ tự động:
 Các module được tự động triển khai bao gồm:
 
 ```text
-ht_beauty_management
+custom_addons
+├── ht_beauty_management
 ├── ht_beauty_core
 ├── ht_beauty_appointment
 ├── ht_beauty_treatment
