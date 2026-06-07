@@ -1,11 +1,11 @@
 <div align="center">
   <h1>🏥 HT Beauty Clinic Management System</h1>
-  <p><b>Hệ thống Quản trị Viện thẩm mỹ Chuẩn Y khoa trên nền tảng Odoo ERP</b></p>
+  <p><b>Hệ thống Quản trị Viện thẩm mỹ HT Beauty trên nền tảng Odoo ERP</b></p>
   <br>
 
   [![Hướng dẫn tải và demo thao tác app Quản lý Viện thẩm mỹ HT Beauty](https://img.youtube.com/vi/AOqt3BUsX_c/maxresdefault.jpg)](https://youtu.be/AOqt3BUsX_c)
   
-  <p><i>📺 Click vào ảnh để xem video Hướng dẫn tải và Demo hệ thống</i></p>
+  <p><i>📺 Click vào ảnh để xem video Hướng dẫn tải và Demo ứng dụng</i></p>
 </div>
 
 ---
@@ -17,6 +17,7 @@ HT Beauty Management System là bộ custom addons được phát triển trên 
 ## 🚀 Tính năng Nổi bật
 
 * **📅 Quản lý Lịch hẹn & Tài nguyên:** Tự động kiểm tra xung đột tài nguyên (Bác sĩ, Kỹ thuật viên, Phòng điều trị) để ngăn chặn xếp trùng lịch.
+* **📅 Xếp lịch hẹn hàng loạt:** Cho phép đặt nhiều lịch hẹn và điều phối tài nguyên cho các lịch hẹn cùng lúc.
 * **📋 Quản lý Phác đồ & Nhật ký điều trị:** Số hóa hồ sơ bệnh án, quản lý liệu trình đa buổi và tự động trừ lùi số buổi khi hoàn thành ca điều trị.
 * **🤖 Tự động hóa CSKH:** Tiến trình chạy ngầm (cron jobs) nhắc lịch hẹn và phân bổ công việc cho bộ phận CSKH theo các mốc thời gian (sau 1 ngày, sau 3 ngày).
 * **🎯 Quản lý Khách hàng (CRM):** Đồng bộ dữ liệu Lead từ các kênh, tự động lọc trùng và gộp hồ sơ liên hệ.
